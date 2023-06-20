@@ -1,5 +1,5 @@
 let inputSize = document.querySelector("input");
-let color;
+let color = "black";
 let eraserBtn = document.getElementById("eraserBtn");
 let greyBtn = document.getElementById("greyBtn");
 let blackBtn = document.getElementById("blackBtn");
@@ -7,6 +7,9 @@ let randColorBtn = document.getElementById("randColorBtn");
 let resetBtn = document.getElementById("resetBtn");
 let click = true;
 let colorMode = document.querySelector("div.mode");
+let errMsg = document.querySelector(".error-text");
+let divContainer = document.querySelector(".square-container");
+
 blackBtn.addEventListener("click", () => {
   changeColor("black");
 });
@@ -54,10 +57,10 @@ function createGrid(size) {
 createGrid(16);
 
 function changeSize(input) {
-  if (input >= 2 && input <= 100) {
+  if (input >= 2 && input <= 64) {
     createGrid(input);
   } else {
-    console.log("error");
+    errMsg.textContent = "Input must be between 2 to 64";
   }
 }
 inputSize.addEventListener("change", function (e) {
@@ -78,13 +81,11 @@ function changeColor(choice) {
   color = choice;
 }
 
-document.querySelector("body").addEventListener("click", (e) => {
-  if (e.target.tagName != "BUTTON") {
-    click = !click;
-    if (click) {
-      colorMode.textContent = "Mode: Coloring";
-    } else {
-      colorMode.textContent = "Mode: Not Coloring";
-    }
+divContainer.addEventListener("click", () => {
+  click = !click;
+  if (click) {
+    colorMode.textContent = "Mode: Coloring";
+  } else {
+    colorMode.textContent = "Mode: Not Coloring";
   }
 });
