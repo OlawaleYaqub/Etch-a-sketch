@@ -59,6 +59,7 @@ createGrid(16);
 function changeSize(input) {
   if (input >= 2 && input <= 64) {
     createGrid(input);
+    errMsg.textContent = ""
   } else {
     errMsg.textContent = "Input must be between 2 to 64";
   }
